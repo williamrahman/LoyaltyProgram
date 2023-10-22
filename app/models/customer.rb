@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  # after_save :check_current_tier
+  before_save :check_current_tier, :maintain_total_spent
   enum tier: [ :bronze, :silver, :gold ]
   has_many :orders
 
@@ -55,17 +55,21 @@ class Customer < ApplicationRecord
 
   private
     def check_current_tier
-      if current_tier_total_spent < 100
-        self.bronze!
-      elsif current_tier_total_spent < 500
-        self.silver!
-      elsif current_tier_total_spent >= 500
-        self.gold!
+      unless self.orders.size == 0
+        if current_tier_total_spent < 100
+          self.bronze! if self.tier != 'bronze'
+        elsif current_tier_total_spent < 500
+          self.silver! if self.tier != 'silver'
+        elsif current_tier_total_spent >= 500
+          self.gold! if self.tier != 'gold'
+        end
       end
     end
 
     def maintain_total_spent
-      self.total_spent = current_tier_total_spent
-      self.save!
+      unless self.orders.size == 0
+        self.total_spent = current_tier_total_spent
+        self.save! if self.total_spent != current_tier_total_spent
+      end
     end
 end

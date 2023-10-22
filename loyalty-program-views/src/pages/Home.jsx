@@ -11,13 +11,13 @@ function Home() {
 
   const fetchOrderDetail = async () => {
     return axios.get(
-      `https://5b9d-118-99-107-131.ngrok-free.app/customers/${selectedUser}`
+      `http://localhost:3000/customers/${selectedUser}`
     );
   };
 
   useEffect(() => {
     const fetchUsers = async () => {
-      return axios.get("https://5b9d-118-99-107-131.ngrok-free.app/customers");
+      return axios.get("http://localhost:3000/customers");
     };
 
     fetchUsers().then((res) => {

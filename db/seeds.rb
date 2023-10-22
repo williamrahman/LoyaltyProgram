@@ -7,20 +7,26 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+ActiveRecord::Base.transaction do
+    Customer.create!([
+        {name: "William Rahman"},
+        {name: "William"},
+        {name: "Rahman"},
+        {name: "Willy"}
+    ])
 
-Customer.create!([
-    {name: "William Rahman"},
-    {name: "William"},
-    {name: "Rahman"},
-    {name: "Willy"}
-])
+    Order.create!([
+        {customer: Customer.first, total_order: 100},
+        {customer: Customer.first, total_order: 200, created_at: DateTime.now.prev_year.beginning_of_year},
+        {customer: Customer.first, total_order: 300, created_at: DateTime.now.prev_year.beginning_of_year},
+        {customer: Customer.find(2), total_order: 100},
+        {customer: Customer.find(2), total_order: 50, created_at: DateTime.now.prev_year.beginning_of_year},
+        {customer: Customer.find(3), total_order: 50},
+        {customer: Customer.last, total_order: 0},
+    ])
 
-Order.create!([
-    {customer: Customer.first, total_order: 100},
-    {customer: Customer.first, total_order: 200, created_at: DateTime.now.prev_year.beginning_of_year},
-    {customer: Customer.first, total_order: 300, created_at: DateTime.now.prev_year.beginning_of_year},
-    {customer: Customer.find(2), total_order: 75},
-    {customer: Customer.find(2), total_order: 50, created_at: DateTime.now.prev_year.beginning_of_year},
-    {customer: Customer.find(3), total_order: 50},
-    {customer: Customer.last, total_order: 0},
-])
+    Customer.all.each do |customer|
+        customer.send(:check_current_tier)
+        customer.send(:maintain_total_spent)
+    end
+end
