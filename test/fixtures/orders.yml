@@ -7,3 +7,15 @@ one:
 two:
   customer: two
   total_order: 1
+
+three:
+  customer: bronze_customer
+  total_order: 50
+
+four:
+  customer: silver_customer
+  total_order: 300
+
+five:
+  customer: gold_customer
+  total_order: 600

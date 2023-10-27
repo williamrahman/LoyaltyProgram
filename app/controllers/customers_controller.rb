@@ -9,7 +9,7 @@ class CustomersController < ApplicationController
       id: customer.id,
       name: customer.name,
       total_spent: customer.current_tier_total_spent,
-      tier: customer.tier.capitalize,
+      tier: customer.tier&.capitalize,
     }}
       
     render json: @response
@@ -21,7 +21,7 @@ class CustomersController < ApplicationController
     @response = {
       id: @customer.id,
       customer_name: @customer.name,
-      tier: @customer.tier.capitalize,
+      tier: @customer.tier&.capitalize,
       date_of_current_tier_trx: DateTime.now.prev_year.beginning_of_year,
       current_tier_total_spent: @customer.current_tier_total_spent,
       next_tier: @customer.next_tier,
@@ -64,6 +64,7 @@ class CustomersController < ApplicationController
 
   # DELETE /customers/1
   def destroy
+    @customer.orders.destroy_all
     @customer.destroy!
   end
 

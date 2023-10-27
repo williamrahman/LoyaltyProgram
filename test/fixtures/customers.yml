@@ -9,3 +9,18 @@ two:
   name: MyString
   total_spent: 1
   tier: MyString
+
+bronze_customer:
+  name: Bronze Customer
+  total_spent: 50
+  tier: bronze
+
+silver_customer:
+  name: Silver Customer
+  total_spent: 300
+  tier: silver
+
+gold_customer:
+  name: Gold Customer
+  total_spent: 600
+  tier: gold

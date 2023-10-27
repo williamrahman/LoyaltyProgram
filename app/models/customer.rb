@@ -39,7 +39,7 @@ class Customer < ApplicationRecord
     elsif self.silver?
       "GOLD"
     else
-      self.tier.upcase
+      self.tier&.upcase
     end
   end
 
@@ -49,7 +49,7 @@ class Customer < ApplicationRecord
     elsif self.silver?
       "BRONZE"
     else
-      self.tier.upcase
+      self.tier&.upcase
     end
   end
 
