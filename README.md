@@ -31,3 +31,6 @@ Running the project
 in the folder of root or "LoyaltyProgram" do the "rails s"
 - FRONTEND:
 go to loyalty-program-views folder and do "npm run dev"
+-UNIT TEST:
+in the folder of root or "LoyaltyProgram" do the "rails test"
+and open ${pwd}/coverage/index.html in the url browser to see the coverage

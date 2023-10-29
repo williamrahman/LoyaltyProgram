@@ -31,7 +31,7 @@ function TierProgress({ orderDetail }) {
         <div
           style={{
             width: "100%",
-            height: 8,
+            height: 16,
             borderRadius: 8,
             backgroundColor: "#E5E5E5",
           }}
@@ -39,11 +39,13 @@ function TierProgress({ orderDetail }) {
           <div
             style={{
               width: `${orderDetail.progress_to_reach_next_tier * 100}%`,
-              height: 8,
+              height: 16,
               borderRadius: 8,
               backgroundColor: "#fbbf24",
             }}
-          ></div>
+          >
+            <div style={{marginLeft: 20, display: "flex", justifyContent: "space-around"}}>{orderDetail.progress_to_reach_next_tier * 100}%</div>
+          </div>
         </div>
         <p
           style={{

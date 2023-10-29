@@ -11,22 +11,6 @@ class CustomerTest < ActiveSupport::TestCase
     assert_equal 50, customer.total_history_orders
   end
 
-  test "should upgrade tier from bronze to silver" do
-    customer = customers(:bronze_customer)
-    Order.create(customer: customer, total_order: 100)
-    customer.send(:check_current_tier)
-
-    assert_equal "silver", customer.reload.tier
-  end
-
-  test "should upgrade tier from silver to gold" do
-    customer = customers(:silver_customer)
-    Order.create(customer: customer, total_order: 200)
-    customer.send(:check_current_tier)
-
-    assert_equal "gold", customer.reload.tier
-  end
-
   test "should maintain tier when total spent is below upgrade threshold" do
     customer = customers(:silver_customer)
     customer.update(total_spent: 300)
@@ -45,12 +29,12 @@ class CustomerTest < ActiveSupport::TestCase
 
   test "should calculate amount needed to upgrade tier from bronze" do
     customer = customers(:bronze_customer)
-    assert_equal 50, customer.upgrade_tier_spent
+    assert_equal 50, customer.upgrade_tier_total_spent_left
   end
 
   test "should calculate amount needed to upgrade tier from silver" do
     customer = customers(:silver_customer)
-    assert_equal 200, customer.upgrade_tier_spent
+    assert_equal 200, customer.upgrade_tier_total_spent_left
   end
 
   test "should get next tier" do

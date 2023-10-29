@@ -24,18 +24,7 @@ function MainHeader() {
           paddingRight: 40,
         }}
       >
-        <Link
-          to="/create-customer"
-          style={{
-            backgroundColor: "#FFF",
-            padding: "8px 16px",
-            textDecoration: "none",
-            borderRadius: 8,
-            color: "#111",
-          }}
-        >
-          Create Customer
-        </Link>
+        {/* <Link to="/create-customer" style={{backgroundColor: "#FFF",padding: "8px 16px",textDecoration: "none",borderRadius: 8, color: "#111",}}>Create Customer</Link> */}
       </div>
     </div>
   );
