@@ -12,7 +12,18 @@ ActiveRecord::Base.transaction do
         {name: "William Rahman"},
         {name: "William"},
         {name: "Rahman"},
-        {name: "Willy"}
+        {name: "Willy"},
+        {name: "Customer 1"},
+        {name: "Customer 2"},
+        {name: "Customer 3"},
+        {name: "Customer 4"},
+        {name: "Customer 5"},
+        {name: "Customer 6"},
+        {name: "Customer 7"},
+        {name: "Customer 8"},
+        {name: "Customer 9"},
+        {name: "Customer 10"},
+        {name: "Customer 11"},
     ])
 
     Order.create!([
@@ -22,6 +33,20 @@ ActiveRecord::Base.transaction do
         {customer: Customer.find(2), total_order: 100},
         {customer: Customer.find(2), total_order: 50, created_at: DateTime.now.prev_year.beginning_of_year},
         {customer: Customer.find(3), total_order: 50},
-        {customer: Customer.last, total_order: 0},
+        {customer: Customer.find(4), total_order: 50},
+        {customer: Customer.find(5), total_order: 37},
+        {customer: Customer.find(5), total_order: 13},
+        {customer: Customer.find(5), total_order: 23},
+        {customer: Customer.find(6), total_order: 91},
+        {customer: Customer.find(8), total_order: 87},
+        {customer: Customer.find(9), total_order: 121},
+        {customer: Customer.find(10), total_order: 553},
+        {customer: Customer.find(11), total_order: 102},
+        {customer: Customer.find(12), total_order: 77},
+        {customer: Customer.find(13), total_order: 56},
+        {customer: Customer.find(13), total_order: 23},
+        {customer: Customer.find(14), total_order: 11},
+        {customer: Customer.find(15), total_order: 105},
+        {customer: Customer.last, total_order: 100},
     ])
 end

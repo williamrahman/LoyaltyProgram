@@ -29,7 +29,7 @@ class CustomersController < ApplicationController
       before_tier: @customer.tier_before,
       total_spent_to_maintain_current_tier: @customer.maintain_current_tier,
       reset_tier_date: DateTime.now.next_year.beginning_of_year,
-      progress_to_reach_next_tier: progress_bar(@customer),
+      progress_to_reach_next_tier: progress_bar(@customer).round(2),
       orders: @customer.orders
     }
     render json: @response
