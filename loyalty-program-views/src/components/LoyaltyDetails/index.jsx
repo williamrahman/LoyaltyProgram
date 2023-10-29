@@ -156,7 +156,7 @@ function LoyaltyDetails({ orderDetail }) {
                       fontWeight: "bold",
                     }}
                   >
-                    {order.total_order}
+                    US$ {order.total_order}
                   </p>
                 </div>
               </div>

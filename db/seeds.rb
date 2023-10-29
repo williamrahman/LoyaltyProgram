@@ -24,9 +24,4 @@ ActiveRecord::Base.transaction do
         {customer: Customer.find(3), total_order: 50},
         {customer: Customer.last, total_order: 0},
     ])
-
-    Customer.all.each do |customer|
-        customer.send(:check_current_tier)
-        customer.send(:maintain_total_spent)
-    end
 end

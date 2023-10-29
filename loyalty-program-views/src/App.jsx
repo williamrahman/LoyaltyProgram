@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainContainer />}>
           <Route index element={<Home />} />
-          <Route path="create-customer" element={<CreateCustomer />} />
+          {/* <Route path="create-customer" element={<CreateCustomer />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

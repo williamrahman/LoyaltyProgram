@@ -3,16 +3,9 @@ import dayjs from "dayjs";
 function TierProgress({ orderDetail }) {
   const tierStatus = () => {
     if (orderDetail.total_spent_to_maintain_current_tier === 0) {
-      return orderDetail.tier;
+      return `Your tier is maintained in ${orderDetail.tier}`;
     } else {
-      switch (orderDetail.tier) {
-        case "Gold":
-          return "Silver";
-        case "Silver":
-          return "Bronze";
-        default:
-          return "Bronze";
-      }
+      return `Your tier will be returned to ${orderDetail.before_tier} on ${dayjs(orderDetail.reset_tier_date).format("D MMMM YYYY")}`
     }
   };
 
@@ -60,8 +53,8 @@ function TierProgress({ orderDetail }) {
             flexShrink: 0,
           }}
         >
-          {orderDetail.current_tier_total_spent} /{" "}
-          {orderDetail.tier === "Bronze" ? 100 : 500}
+          US$ {orderDetail.current_tier_total_spent} /{" "}
+          US$ {orderDetail.tier === "Bronze" ? 100 : 500}
         </p>
       </div>
       <p
@@ -73,7 +66,7 @@ function TierProgress({ orderDetail }) {
       >
         {orderDetail.total_spent_need_to_upgrade === 0
           ? "Congratulations! You have reach GOLD tier."
-          : `${orderDetail.total_spent_need_to_upgrade} orders left to ${orderDetail.next_tier}`}
+          : `US$ ${orderDetail.total_spent_need_to_upgrade} orders left to ${orderDetail.next_tier}`}
       </p>
       <div
         style={{
@@ -82,11 +75,9 @@ function TierProgress({ orderDetail }) {
         }}
       >
         <p>
-          Maintain your tier by spending another{" "}
-          {orderDetail.total_spent_to_maintain_current_tier} transaction.
+          {orderDetail.total_spent_to_maintain_current_tier === 0 ? "" : `Maintain your tier by spending another US$ ${orderDetail.total_spent_to_maintain_current_tier}`}
         </p>
         <p>
-          Your tier will be reset to{" "}
           <span
             style={{
               fontWeight: "bold",
@@ -94,8 +85,6 @@ function TierProgress({ orderDetail }) {
           >
             {tierStatus()}
           </span>
-          {" on "}
-          {dayjs(orderDetail.reset_tier_date).format("D MMMM YYYY")}.
         </p>
       </div>
     </div>

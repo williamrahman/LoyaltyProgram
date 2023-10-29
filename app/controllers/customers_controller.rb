@@ -25,9 +25,9 @@ class CustomersController < ApplicationController
       date_of_current_tier_trx: DateTime.now.prev_year.beginning_of_year,
       current_tier_total_spent: @customer.current_tier_total_spent,
       next_tier: @customer.next_tier,
-      total_spent_need_to_upgrade: @customer.upgrade_tier_spent,
+      total_spent_need_to_upgrade: @customer.upgrade_tier_total_spent_left,
       before_tier: @customer.tier_before,
-      total_spent_to_maintain_current_tier: @customer.maintain_current_tier == 0 ? 0 : @customer.maintain_current_tier,
+      total_spent_to_maintain_current_tier: @customer.maintain_current_tier,
       reset_tier_date: DateTime.now.next_year.beginning_of_year,
       progress_to_reach_next_tier: progress_bar(@customer),
       orders: @customer.orders
@@ -81,9 +81,9 @@ class CustomersController < ApplicationController
 
     def progress_bar(customer)
       if customer.silver? 
-        1 - customer.upgrade_tier_spent.to_f/400
+        1 - customer.upgrade_tier_total_spent_left.to_f/400
       elsif customer.bronze?
-        1 - customer.upgrade_tier_spent.to_f/100
+        1 - customer.upgrade_tier_total_spent_left.to_f/100
       else
         1
       end
